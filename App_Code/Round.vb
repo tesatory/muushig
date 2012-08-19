@@ -48,6 +48,7 @@ Public Class Round
         If io = False Then
             plr.Remove(who)
         End If
+        mext()
         If plr.Count = 2 Then
             status = RoundStatus.change
             who = dealer
@@ -55,7 +56,6 @@ Public Class Round
         If who = dealer Then
             status = RoundStatus.change
         End If
-        mext()
     End Sub
 
     Public Sub change(ByVal num As List(Of Integer))
