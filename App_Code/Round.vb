@@ -106,8 +106,8 @@ Public Class Round
             status = RoundStatus.playing
         End If
         If status = RoundStatus.playing Then
-            plr(who).hand.RemoveAt(num)
-            Up(gazar, plr(who).hand(num), num)
+            plr(who).hand.RemoveAt(num - 1)
+            Up(gazar, plr(who).hand(num - 1), num)
             mext()
             If who = beginplr Then
                 If plr(who).hand.Count = 0 Then
