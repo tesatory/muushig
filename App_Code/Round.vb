@@ -16,6 +16,7 @@ Public Class Round
     Public who As String
     Public huzur As Card
     Public small As String
+    Public beginplr As String
     Public gazar As Card
     Public remain As Integer = 6
     Public status As RoundStatus = RoundStatus.inout
@@ -94,9 +95,10 @@ Public Class Round
     End Sub
 
     Public Sub Play(ByVal num As Integer)
-        Dim beginplr As String = who
+
         If status = RoundStatus.play Then
             small = who
+            beginplr = small
             If huzur.suit <> SuitType.Spade Then
                 gazar = New Card(1, SuitType.Spade)
             End If
@@ -106,8 +108,8 @@ Public Class Round
             status = RoundStatus.playing
         End If
         If status = RoundStatus.playing Then
-            plr(who).hand.RemoveAt(num - 1)
-            Up(gazar, plr(who).hand(num - 1), num)
+            Up(gazar, plr(who).hand(num)) ', num)
+            plr(who).hand.RemoveAt(num)
             mext()
             If who = beginplr Then
                 If plr(who).hand.Count = 0 Then
@@ -120,12 +122,12 @@ Public Class Round
 
 
 
-    Private Sub Up(ByVal card1 As Card, ByVal card2 As Card, ByVal num As Integer)
+    Private Sub Up(ByVal card1 As Card, ByVal card2 As Card) ', ByVal num As Integer)
         If huzur.suit = card1.suit Then
             If card2.suit = card1.suit Then
                 If card2.rank > card1.rank Then
                     small = who
-                    gazar = plr(who).hand(num - 1)
+                    gazar = card2 ' plr(who).hand(num)
                 End If
             End If
         End If
@@ -133,12 +135,12 @@ Public Class Round
         If huzur.suit <> card1.suit Then
             If card2.suit = huzur.suit Then
                 small = who
-                gazar = plr(who).hand(num - 1)
+                gazar = card2 ' plr(who).hand(num)
             End If
             If card2.suit <> huzur.suit Then
                 If card1.rank < card2.rank Then
                     small = who
-                    gazar = plr(who).hand(num - 1)
+                    gazar = card2 ' plr(who).hand(num)
                 End If
             End If
         End If

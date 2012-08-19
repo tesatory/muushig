@@ -88,7 +88,7 @@ Partial Class GamePage
         timer.Enabled = True
     End Sub
 
-    Protected Sub btn_change_Click(sender As Object, e As System.EventArgs) Handles btn_change.Click
+    Protected Sub btn_change_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btn_change.Click
         Dim change_num As New List(Of Integer)
         For i As Integer = 0 To change_list.Items.Count - 1
             If change_list.Items(i).Selected Then
@@ -114,7 +114,7 @@ Partial Class GamePage
 
     End Sub
 
-    Protected Sub btn_play_Click(sender As Object, e As System.EventArgs) Handles btn_play.Click
+    Protected Sub btn_play_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btn_play.Click
         Dim play_num As Integer
         For i As Integer = 0 To play_list.Items.Count - 1
             If play_list.Items(i).Selected Then
