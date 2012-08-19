@@ -18,23 +18,27 @@
                 <asp:Label ID="lbl_players_name" runat="server">
                 </asp:Label>
                 <hr />
-                Хөзөр: <asp:Label ID="lbl_huzur" runat="server">
+                Хөзөр: <br />
+                <asp:Label ID="lbl_huzur" runat="server">
                 </asp:Label>
                 <br />
-                Гарын мод: <asp:Label ID="my_hand" runat="server">
+                Гарын мод: 
+                <br />
+                <asp:Label ID="my_hand" runat="server">
                 </asp:Label>
+                <br />
                 <asp:Button id="btn_in" runat="server" Text="Орох" Visible="false" />
                 <asp:Button id="btn_out" runat="server" Text="Орохгүй" Visible="false" />
                 <asp:Panel ID="pnl_change" runat="server" Visible="false">
                     <asp:Label ID="lbl_remain" runat="server"></asp:Label>
-                    <asp:CheckBoxList id="change_list" runat="server">                    
+                    <asp:CheckBoxList id="change_list" runat="server" RepeatDirection="Horizontal">                    
                     </asp:CheckBoxList>
                     <asp:Button ID="btn_change" runat="server" Text="Солих" />
                 </asp:Panel>
 
                 <asp:Panel ID="pnl_play" runat="server" Visible="false">
                     <asp:Label ID="lbl_gazar" runat="server"></asp:Label>
-                    <asp:RadioButtonList  id="play_list" runat="server">                    
+                    <asp:RadioButtonList  id="play_list" runat="server" RepeatDirection="Horizontal">                    
                     </asp:RadioButtonList>
                     <asp:Button ID="btn_play" runat="server" Text="Гарах" />
                 </asp:Panel>

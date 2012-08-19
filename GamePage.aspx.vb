@@ -18,14 +18,14 @@ Partial Class GamePage
 
         my_hand.Text = ""
         For Each c As Card In player.hand
-            my_hand.Text &= c.ToString & " | "
+            my_hand.Text &= c.ToHtmlImg & "  "
         Next
 
 
 
         If Not game.current_round Is Nothing Then
             If Not game.current_round.huzur Is Nothing Then
-                lbl_huzur.Text = game.current_round.huzur.ToString
+                lbl_huzur.Text = game.current_round.huzur.ToHtmlImg
             End If
 
             If game.current_round.who = player.name Then
