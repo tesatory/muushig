@@ -6,5 +6,15 @@ Partial Class _Default
         Dim my_deck As New Deck
         my_deck.Shuffle()
         Response.Write(my_deck.ToString)
+
+        Dim hands(5) As Hand
+        For i As Integer = 0 To 4
+            hands(i) = New Hand
+        Next
+        my_deck.Deal(5, hands)
+        For i As Integer = 0 To 4
+            Response.Write(hands(i).ToString)
+            Response.Write("<br/>")
+        Next
     End Sub
 End Class
