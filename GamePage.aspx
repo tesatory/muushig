@@ -29,6 +29,12 @@
                     <asp:Button ID="btn_change" runat="server" Text="Солих" />
                 </asp:Panel>
 
+                <asp:Panel ID="pnl_play" runat="server" Visible="false">
+                    <asp:Label ID="lbl_gazar" runat="server"></asp:Label>
+                    <asp:RadioButtonList  id="play_list" runat="server">                    
+                    </asp:RadioButtonList>
+                    <asp:Button ID="btn_play" runat="server" Text="Гарах" />
+                </asp:Panel>
 
                 <asp:Timer ID="timer" runat="server" Interval="1000">
                 </asp:Timer>
