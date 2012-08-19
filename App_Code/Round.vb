@@ -98,7 +98,7 @@ Public Class Round
     Public Sub Play(ByVal num As Integer)
 
         If status = RoundStatus.play Then
-            beginplr = small
+            beginplr = who
             If huzur.suit <> SuitType.Spade Then
                 gazar = New Card(1, SuitType.Spade)
             End If
@@ -108,12 +108,13 @@ Public Class Round
             status = RoundStatus.playing
         End If
         If status = RoundStatus.playing Then
-            Up(gazar, plr(who).hand(num)) ', num)
+            Up(gazar, who, num) 'plr(who).hand(num)) , num)
             plr(who).hand.RemoveAt(num)
             mext()
             If who = beginplr Then
                 If plr(who).hand.Count = 0 Then
                     status = RoundStatus.finish
+                    Return
                 End If
                 status = RoundStatus.play
             End If
@@ -122,25 +123,25 @@ Public Class Round
 
 
 
-    Private Sub Up(ByVal card1 As Card, ByVal card2 As Card) ', ByVal num As Integer)
+    Private Sub Up(ByVal card1 As Card, ByVal str As String, ByVal num As Integer)
         If huzur.suit = card1.suit Then
-            If card2.suit = card1.suit Then
-                If card2.rank > card1.rank Then
-                    small = who
-                    gazar = card2 ' plr(who).hand(num)
+            If plr(str).hand(num).suit = card1.suit Then
+                If plr(str).hand(num).rank > card1.rank Then
+                    small = str
+                    gazar = plr(str).hand(num) ' 
                 End If
             End If
         End If
 
         If huzur.suit <> card1.suit Then
-            If card2.suit = huzur.suit Then
-                small = who
-                gazar = card2 ' plr(who).hand(num)
+            If plr(str).hand(num).suit = huzur.suit Then
+                small = str
+                gazar = plr(str).hand(num) ' plr(who).hand(num)
             End If
-            If card2.suit <> huzur.suit Then
-                If card1.rank < card2.rank Then
-                    small = who
-                    gazar = card2 ' plr(who).hand(num)
+            If plr(str).hand(num).suit <> huzur.suit Then
+                If card1.rank < plr(str).hand(num).rank Then
+                    small = str
+                    gazar = plr(str).hand(num) ' plr(who).hand(num)
                 End If
             End If
         End If
