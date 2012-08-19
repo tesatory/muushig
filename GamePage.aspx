@@ -23,6 +23,7 @@
                 <asp:Button id="btn_in" runat="server" Text="Орох" Visible="false" />
                 <asp:Button id="btn_out" runat="server" Text="Орохгүй" Visible="false" />
                 <asp:Panel ID="pnl_change" runat="server" Visible="false">
+                    <asp:Label ID="lbl_remain" runat="server"></asp:Label>
                     <asp:CheckBoxList id="change_list" runat="server">                    
                     </asp:CheckBoxList>
                     <asp:Button ID="btn_change" runat="server" Text="Солих" />

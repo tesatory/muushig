@@ -18,7 +18,7 @@ Partial Class GamePage
 
         my_hand.Text = ""
         For Each c As Card In player.hand
-            my_hand.Text &= c.ToString & " "
+            my_hand.Text &= c.ToString & " | "
         Next
 
         If Not game.current_round Is Nothing Then
@@ -30,12 +30,16 @@ Partial Class GamePage
                         btn_out.Visible = True
                         timer.Enabled = False
                     Case RoundStatus.change
-                        pnl_change.Visible = True
-                        change_list.Items.Clear()
-                        For Each c As Card In player.hand
-                            change_list.Items.Add(c.ToString)
-                        Next
-                        timer.Enabled = False
+                        If pnl_change.Visible = False Then
+                            pnl_change.Visible = True
+                            'lbl_remain.Text = game.current_round.remain
+                            change_list.Items.Clear()
+                            For i As Integer = 0 To player.hand.Count - 1
+                                change_list.Items.Add(New ListItem(player.hand(i).ToString, i))
+                            Next
+                            timer.Enabled = False
+                        End If
+
                 End Select
             End If
         End If
@@ -57,8 +61,6 @@ Partial Class GamePage
     End Sub
 
     Protected Sub btn_change_Click(sender As Object, e As System.EventArgs) Handles btn_change.Click
-        pnl_change.Visible = False
-        timer.Enabled = True
         Dim change_num As New List(Of Integer)
         For i As Integer = 0 To change_list.Items.Count - 1
             If change_list.Items(i).Selected Then
@@ -66,6 +68,9 @@ Partial Class GamePage
             End If
         Next
         game.current_round.change(change_num)
+        pnl_change.Visible = False
+        timer.Enabled = True
+        change_list.Items.Clear()
     End Sub
 
     Protected Sub btn_quit_Click(sender As Object, e As System.EventArgs) Handles btn_quit.Click
