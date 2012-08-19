@@ -66,6 +66,7 @@ Public Class Round
             who = dealer
             plr(who).hand(num(0)) = huzur
             status = RoundStatus.play
+            mext()
             Return
         End If
 
@@ -81,6 +82,8 @@ Public Class Round
         If remain = 0 Then
             status = RoundStatus.change_h
             who = dealer
+            'mende
+
             Return
         End If
         If who = dealer Then
