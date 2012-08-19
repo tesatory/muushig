@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="Default.aspx.vb" Inherits="_Default" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="CreatePlayer.aspx.vb" Inherits="CreatePlayer" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -9,7 +9,8 @@
 <body>
     <form id="form1" runat="server">
     <div>
-    <asp:ImageButton id="player_card1" runat="server" ImageUrl="~/Images/Cards/210.gif" />
+    Нэр: <asp:TextBox ID="tb_player_name" runat="server"></asp:TextBox>
+    <asp:Button ID="btn_ok" runat="server" Text="OK" />
     </div>
     </form>
 </body>
