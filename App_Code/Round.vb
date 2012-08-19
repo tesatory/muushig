@@ -48,7 +48,6 @@ Public Class Round
         If io = False Then
             plr.Remove(who)
         End If
-        mext()
         If plr.Count = 2 Then
             status = RoundStatus.change
             who = dealer
@@ -56,14 +55,17 @@ Public Class Round
         If who = dealer Then
             status = RoundStatus.change
         End If
+        mext()
     End Sub
 
     Public Sub change(ByVal num As List(Of Integer))
 
         If status = RoundStatus.change_h Then
-            plr(dealer).hand.RemoveAt(num(0))
-            plr(dealer).hand.Add(huzur)
-           
+            'plr(dealer).hand.RemoveAt(num(0))
+            'plr(dealer).hand.Add(huzur)
+            who = dealer
+            plr(who).hand(num(0)) = huzur
+
             status = RoundStatus.play
         End If
 
@@ -71,9 +73,10 @@ Public Class Round
         Diagnostics.Debug.Assert(remain >= 0)
 
         For i As Integer = 0 To num.Count - 1
-            plr(who).hand.RemoveAt(num(i))
+            'plr(who).hand.RemoveAt(num(i))
+            plr(who).hand(num(i)) = deck.Deal(1)(0)
         Next
-        plr(who).hand.AddRange(deck.Deal(num.Count))
+        'plr(who).hand.AddRange(deck.Deal(num.Count))
 
         If remain = 0 Then
             status = RoundStatus.change_h
