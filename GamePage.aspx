@@ -18,7 +18,10 @@
                 <asp:Label ID="lbl_players_name" runat="server">
                 </asp:Label>
                 <hr />
-                <asp:Label ID="my_hand" runat="server">
+                Хөзөр: <asp:Label ID="lbl_huzur" runat="server">
+                </asp:Label>
+                <br />
+                Гарын мод: <asp:Label ID="my_hand" runat="server">
                 </asp:Label>
                 <asp:Button id="btn_in" runat="server" Text="Орох" Visible="false" />
                 <asp:Button id="btn_out" runat="server" Text="Орохгүй" Visible="false" />
