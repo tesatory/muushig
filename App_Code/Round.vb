@@ -17,11 +17,9 @@ Public Class Round
     Public huzur As Card
     Public small As String
     Public gazar As Card
+    Public remain As Integer = 6
     Public status As RoundStatus = RoundStatus.inout
 
-
-
-    Dim remain As Integer = 6
 
     Public Sub New(ByVal _plr As List(Of Player), ByVal dlr As String)
         plr = New Dictionary(Of String, Player)

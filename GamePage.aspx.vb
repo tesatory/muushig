@@ -46,21 +46,27 @@ Partial Class GamePage
 
     End Sub
 
-    Protected Sub btn_in_Click(sender As Object, e As System.EventArgs) Handles btn_in.Click
+    Protected Sub btn_in_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btn_in.Click
         game.current_round.inout(True)
         btn_in.Visible = False
         btn_out.Visible = False
         timer.Enabled = True
     End Sub
 
-    Protected Sub btn_out_Click(sender As Object, e As System.EventArgs) Handles btn_out.Click
+    Protected Sub btn_out_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btn_out.Click
         game.current_round.inout(False)
         btn_in.Visible = False
         btn_out.Visible = False
         timer.Enabled = True
     End Sub
 
+<<<<<<< HEAD
     Protected Sub btn_change_Click(sender As Object, e As System.EventArgs) Handles btn_change.Click
+=======
+    Protected Sub btn_change_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btn_change.Click
+        pnl_change.Visible = False
+        timer.Enabled = True
+>>>>>>> 55b02d22f6866484249f0e8add59ec73aaf9238b
         Dim change_num As New List(Of Integer)
         For i As Integer = 0 To change_list.Items.Count - 1
             If change_list.Items(i).Selected Then
@@ -73,7 +79,7 @@ Partial Class GamePage
         change_list.Items.Clear()
     End Sub
 
-    Protected Sub btn_quit_Click(sender As Object, e As System.EventArgs) Handles btn_quit.Click
+    Protected Sub btn_quit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btn_quit.Click
         Session("player") = Nothing
 
     End Sub
