@@ -125,7 +125,7 @@ Public Class Round
             If card2.suit = card1.suit Then
                 If card2.rank > card1.rank Then
                     small = who
-                    gazar = plr(who).hand(num)
+                    gazar = plr(who).hand(num - 1)
                 End If
             End If
         End If
@@ -133,12 +133,12 @@ Public Class Round
         If huzur.suit <> card1.suit Then
             If card2.suit = huzur.suit Then
                 small = who
-                gazar = plr(who).hand(num)
+                gazar = plr(who).hand(num - 1)
             End If
             If card2.suit <> huzur.suit Then
                 If card1.rank < card2.rank Then
                     small = who
-                    gazar = plr(who).hand(num)
+                    gazar = plr(who).hand(num - 1)
                 End If
             End If
         End If
