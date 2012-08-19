@@ -2,10 +2,10 @@
 Imports System.Collections.Generic
 
 Public Class Game
-    Public cards As List(Of Card)
+    Public cards As Stack(Of Card)
 
     Public Sub New()
-        cards = New List(Of Card)()
+        cards = New Stack(Of Card)
     End Sub
 
     

@@ -7,7 +7,7 @@ Public Class Deck
 
     Public Sub New()
         cards = New Stack(Of Card)
-        For i As Integer = 1 To 14
+        For i As Integer = 7 To 14
             cards.Push(New Card(i, SuitType.Club))
             cards.Push(New Card(i, SuitType.Diamond))
             cards.Push(New Card(i, SuitType.Heart))
@@ -34,12 +34,13 @@ Public Class Deck
 
     End Sub
 
-    Public Sub Deal(num_cards As Integer, hands() As Hand)
+    Public Sub Deal(num_cards As Integer, hands() As Hand, huzur() As Card)
         For i As Integer = 1 To num_cards
             For j As Integer = 0 To hands.Length - 1
                 hands(j).cards.Add(cards.Pop)
             Next
         Next
+        huzur(0) = cards.Pop
     End Sub
 
 
