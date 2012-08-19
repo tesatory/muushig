@@ -17,6 +17,10 @@
                 <asp:Label ID="lbl_players_name" runat="server">
                 </asp:Label>
                 <hr />
+                <asp:Label ID="my_hand" runat="server">
+                </asp:Label>
+                <asp:Button id="btn_in" runat="server" Text="Орох" Visible="false" />
+                <asp:Button id="btn_out" runat="server" Text="Орохгүй" Visible="false" />
             </ContentTemplate>
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="timer" EventName="Tick" />
@@ -24,16 +28,6 @@
         </asp:UpdatePanel>
         <asp:Timer ID="timer" runat="server" Interval="1000">
         </asp:Timer>
-        <hr />
-        <asp:UpdatePanel ID="up_my_hand" runat="server" UpdateMode="Conditional">
-            <ContentTemplate>
-                <asp:Label ID="my_hand" runat="server">
-                </asp:Label>
-                
-            </ContentTemplate>
-            <Triggers>
-            </Triggers>
-        </asp:UpdatePanel>
     </div>
     </form>
 </body>

@@ -85,5 +85,5 @@ Public Class Game
     Private players As Dictionary(Of String, Player)
     Private PLAYER_WAIT_TIMEOUT As Integer = 5
     Private PLAYER_NUM As Integer = 2
-    Private current_round As Round
+    Public current_round As Round
 End Class
