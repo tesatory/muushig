@@ -7,7 +7,6 @@ Public Enum RoundStatus
     play
     playing
     finish
-    fault
 End Enum
 
 Public Class Round
@@ -89,6 +88,7 @@ Public Class Round
     End Sub
 
     Public Sub Play(ByVal num As Integer)
+        Dim beginplr As String = who
         If status = RoundStatus.play Then
             small = who
             If huzur.suit <> SuitType.Spade Then
@@ -99,10 +99,20 @@ Public Class Round
             End If
             status = RoundStatus.playing
         End If
-
-        Up(gazar, plr(who).hand(num), num)
-        mext()
+        If status = RoundStatus.playing Then
+            plr(who).hand.RemoveAt(num)
+            Up(gazar, plr(who).hand(num), num)
+            mext()
+            If who = beginplr Then
+                If plr(who).hand.Count = 0 Then
+                    status = RoundStatus.finish
+                End If
+                status = RoundStatus.play
+            End If
+        End If
     End Sub
+
+
 
     Private Sub Up(ByVal card1 As Card, ByVal card2 As Card, ByVal num As Integer)
         If huzur.suit = card1.suit Then
