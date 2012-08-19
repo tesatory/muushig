@@ -42,21 +42,21 @@ Partial Class GamePage
 
     End Sub
 
-    Protected Sub btn_in_Click(sender As Object, e As System.EventArgs) Handles btn_in.Click
+    Protected Sub btn_in_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btn_in.Click
         game.current_round.inout(True)
         btn_in.Visible = False
         btn_out.Visible = False
         timer.Enabled = True
     End Sub
 
-    Protected Sub btn_out_Click(sender As Object, e As System.EventArgs) Handles btn_out.Click
+    Protected Sub btn_out_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btn_out.Click
         game.current_round.inout(False)
         btn_in.Visible = False
         btn_out.Visible = False
         timer.Enabled = True
     End Sub
 
-    Protected Sub btn_change_Click(sender As Object, e As System.EventArgs) Handles btn_change.Click
+    Protected Sub btn_change_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btn_change.Click
         pnl_change.Visible = False
         timer.Enabled = True
         Dim change_num As New List(Of Integer)
@@ -68,7 +68,7 @@ Partial Class GamePage
         game.current_round.change(change_num)
     End Sub
 
-    Protected Sub btn_quit_Click(sender As Object, e As System.EventArgs) Handles btn_quit.Click
+    Protected Sub btn_quit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btn_quit.Click
         Session("player") = Nothing
 
     End Sub
