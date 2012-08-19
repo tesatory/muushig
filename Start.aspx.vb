@@ -1,6 +1,8 @@
 ﻿
 Partial Class Start
     Inherits System.Web.UI.Page
+    Private player As Player
+    Private game As Game
 
     Protected Sub Page_Load(sender As Object, e As System.EventArgs) Handles Me.Load
         If Application("game") Is Nothing Then
@@ -10,11 +12,11 @@ Partial Class Start
         If (Session("player") Is Nothing) Then
             Response.Redirect("./CreatePlayer.aspx")
         End If
-        Dim player As Player = Session("player")
+        player = Session("player")
         player.last_active_time = Now
         player.status = PlayerStatus.ACTIVE
 
-        Dim game As Game = Application("game")
+        game = Application("game")
         game.ClearInactivePlayers()
 
         If game.IsPlayerExist(player.name) = False Then
@@ -31,8 +33,8 @@ Partial Class Start
     End Sub
 
     Protected Sub btn_start_Click(sender As Object, e As System.EventArgs) Handles btn_start.Click
-        Dim player As Player = Session("player")
         player.status = PlayerStatus.IN_GAME
+        game.PlayerReady()
         Response.Redirect("./GamePage.aspx")
     End Sub
 End Class

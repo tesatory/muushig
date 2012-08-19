@@ -8,6 +8,17 @@ Partial Class GamePage
         player = Session("player")
         game = Application("game")
 
+        If (game Is Nothing) Or (player Is Nothing) Then
+            Response.Redirect("./Start.aspx")
+        End If
+
         lbl_players_name.Text = game.GetPlayersList
+
+        If my_hand.Text = "" And game.status = GameStatus.STARTED Then
+            For Each c As Card In player.hand
+                my_hand.Text &= c.ToString & " "
+                up_my_hand.Update()
+            Next
+        End If
     End Sub
 End Class

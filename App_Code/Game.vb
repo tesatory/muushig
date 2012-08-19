@@ -61,22 +61,29 @@ Public Class Game
     End Function
 
     Public Sub PlayerReady()
-        status = GameStatus.STARTED
+        status = GameStatus.STARTING
+        Dim ready As Boolean = True
         For Each p As Player In players.Values
-            If p.status = PlayerStatus.ACTIVE Then
-                status = GameStatus.STARTING
+            If p.status <> PlayerStatus.IN_GAME Then
+                ready = False
             End If
         Next
 
-        If status = GameStatus.STARTED Then Start()
+        If ready Then Start()
     End Sub
 
     Private Sub Start()
+        Dim plr As New List(Of Player)
+        For Each p In players.Values
+            plr.Add(p)
+        Next
+        current_round = New Round(plr, players.Keys(0))
 
+        status = GameStatus.STARTED
     End Sub
 
     Private players As Dictionary(Of String, Player)
     Private PLAYER_WAIT_TIMEOUT As Integer = 5
     Private PLAYER_NUM As Integer = 2
-
+    Private current_round As Round
 End Class
