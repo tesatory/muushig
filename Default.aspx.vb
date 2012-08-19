@@ -11,13 +11,9 @@ Partial Class _Default
         For i As Integer = 0 To 4
             hands(i) = New Hand
         Next
-        my_deck.Deal(5, hands)
-        For i As Integer = 0 To 4
-            Response.Write("<br/>")
-            Response.Write(hands(i).ToString)
-        Next
 
-
+        Response.Write("<br/>")
+        Response.Write(my_deck.cards.Count.ToString)
 
     End Sub
 End Class

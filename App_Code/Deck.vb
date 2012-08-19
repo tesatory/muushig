@@ -7,7 +7,7 @@ Public Class Deck
 
     Public Sub New()
         cards = New Stack(Of Card)
-        For i As Integer = 1 To 14
+        For i As Integer = 7 To 14
             cards.Push(New Card(i, SuitType.Club))
             cards.Push(New Card(i, SuitType.Diamond))
             cards.Push(New Card(i, SuitType.Heart))
@@ -31,16 +31,16 @@ Public Class Deck
         For i As Integer = 0 To shuffled_cards.Length - 1
             cards.Push(shuffled_cards(i))
         Next
-
     End Sub
 
-    Public Sub Deal(num_cards As Integer, hands() As Hand)
+    Public Function Deal(ByVal num_cards As Integer) As List(Of Card)
+        Dim crd As New List(Of Card)
         For i As Integer = 1 To num_cards
-            For j As Integer = 0 To hands.Length - 1
-                hands(j).cards.Add(cards.Pop)
-            Next
+            crd.Add(cards.Pop)
         Next
-    End Sub
+        Return crd
+    End Function
+
 
 
     Public Overrides Function ToString() As String

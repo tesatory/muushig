@@ -8,6 +8,7 @@ Public Enum GameStatus
 End Enum
 
 Public Class Game
+
     Public status As GameStatus
 
     Public Sub New()
@@ -77,6 +78,5 @@ Public Class Game
     Private players As Dictionary(Of String, Player)
     Private PLAYER_WAIT_TIMEOUT As Integer = 5
     Private PLAYER_NUM As Integer = 2
-
 
 End Class
