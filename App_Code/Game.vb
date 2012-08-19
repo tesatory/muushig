@@ -16,7 +16,7 @@ Public Class Game
         status = GameStatus.WAITING_PLAYERS
     End Sub
 
-    Public Sub AddPlayer(p As Player)
+    Public Sub AddPlayer(ByVal p As Player)
         If status = GameStatus.WAITING_PLAYERS Then
             players.Add(p.name, p)
         End If
@@ -52,7 +52,7 @@ Public Class Game
         End If
     End Sub
 
-    Public Function IsPlayerExist(name As String) As Boolean
+    Public Function IsPlayerExist(ByVal name As String) As Boolean
         If players.ContainsKey(name) Then
             Return True
         Else
