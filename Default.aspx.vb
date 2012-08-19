@@ -16,7 +16,7 @@ Partial Class _Default
             Response.Write("<br/>")
             Response.Write(hands(i).ToString)
         Next
-        Response.Write(huzur(0).ToString)
+
 
 
     End Sub

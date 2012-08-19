@@ -40,11 +40,7 @@ Public Class Deck
                 hands(j).cards.Add(cards.Pop)
             Next
         Next
-        huzur(0) = cards.Pop
     End Sub
-
-
-
 
 
     Public Overrides Function ToString() As String
