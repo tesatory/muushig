@@ -20,7 +20,10 @@ Partial Class GamePage
         For Each c As Card In player.hand
             my_hand.Text &= c.ToString & " | "
         Next
-        lbl_huzur.Text = game.current_round.huzur.ToString
+
+        If Not game.current_round.huzur Is Nothing Then
+            lbl_huzur.Text = game.current_round.huzur.ToString
+        End If
 
         If Not game.current_round Is Nothing Then
 
