@@ -5,6 +5,7 @@ Public Enum RoundStatus
     change
     change_h
     play
+    playing
     finish
     fault
 End Enum
@@ -65,13 +66,7 @@ Public Class Round
         If status = RoundStatus.change_h Then
             plr(dealer).hand.RemoveAt(num(0))
             plr(dealer).hand.Add(huzur)
-            small = who
-            If huzur.suit <> SuitType.Spade Then
-                gazar = New Card(1, SuitType.Spade)
-            End If
-            If huzur.suit = SuitType.Spade Then
-                gazar = New Card(1, SuitType.Diamond)
-            End If
+           
             status = RoundStatus.play
         End If
 
@@ -93,7 +88,18 @@ Public Class Round
         mext()
     End Sub
 
-    Public Sub Play(num As Integer)
+    Public Sub Play(ByVal num As Integer)
+        If status = RoundStatus.play Then
+            small = who
+            If huzur.suit <> SuitType.Spade Then
+                gazar = New Card(1, SuitType.Spade)
+            End If
+            If huzur.suit = SuitType.Spade Then
+                gazar = New Card(1, SuitType.Diamond)
+            End If
+            status = RoundStatus.playing
+        End If
+
         Up(gazar, plr(who).hand(num), num)
         mext()
     End Sub
