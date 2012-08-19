@@ -21,11 +21,12 @@ Partial Class GamePage
             my_hand.Text &= c.ToString & " | "
         Next
 
-        If Not game.current_round.huzur Is Nothing Then
-            lbl_huzur.Text = game.current_round.huzur.ToString
-        End If
+
 
         If Not game.current_round Is Nothing Then
+            If Not game.current_round.huzur Is Nothing Then
+                lbl_huzur.Text = game.current_round.huzur.ToString
+            End If
 
             If game.current_round.who = player.name Then
                 Select Case game.current_round.status
