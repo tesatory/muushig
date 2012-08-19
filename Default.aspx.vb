@@ -7,7 +7,7 @@ Partial Class _Default
         my_deck.Shuffle()
         Response.Write(my_deck.ToString)
 
-        Dim hands(5) As Hand
+        Dim hands(4) As Hand
         For i As Integer = 0 To 4
             hands(i) = New Hand
         Next
