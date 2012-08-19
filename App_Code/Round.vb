@@ -68,6 +68,7 @@ Public Class Round
             plr(who).hand(num(0)) = huzur
             status = RoundStatus.play
             mext()
+            small = who
             Return
         End If
 
@@ -97,7 +98,6 @@ Public Class Round
     Public Sub Play(ByVal num As Integer)
 
         If status = RoundStatus.play Then
-            small = who
             beginplr = small
             If huzur.suit <> SuitType.Spade Then
                 gazar = New Card(1, SuitType.Spade)
