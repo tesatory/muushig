@@ -13,8 +13,11 @@ Partial Class _Default
         Next
         my_deck.Deal(5, hands)
         For i As Integer = 0 To 4
-            Response.Write(hands(i).ToString)
             Response.Write("<br/>")
+            Response.Write(hands(i).ToString)
         Next
+        Response.Write(huzur(0).ToString)
+
+
     End Sub
 End Class

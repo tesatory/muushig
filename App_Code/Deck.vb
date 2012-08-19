@@ -4,6 +4,7 @@ Imports System.Collections.Generic
 Public Class Deck
     Public cards As Stack(Of Card)
 
+
     Public Sub New()
         cards = New Stack(Of Card)
         For i As Integer = 1 To 14
@@ -39,7 +40,12 @@ Public Class Deck
                 hands(j).cards.Add(cards.Pop)
             Next
         Next
+        huzur(0) = cards.Pop
     End Sub
+
+
+
+
 
     Public Overrides Function ToString() As String
         Dim sb As New StringBuilder
