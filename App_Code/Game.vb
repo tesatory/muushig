@@ -22,6 +22,10 @@ Public Class Game
         End If
     End Sub
 
+    Public Sub RemovePlayer(ByVal p As Player)
+        players.Remove(p.name)
+    End Sub
+
     Public Function GetPlayersList() As String
         Dim sb As New StringBuilder
         For Each p As Player In players.Values
@@ -43,13 +47,14 @@ Public Class Game
     End Function
 
     Public Sub ClearInactivePlayers()
-        If status = GameStatus.WAITING_PLAYERS Then
-            For i As Integer = players.Count - 1 To 0 Step -1
-                If players.Values(i).last_active_time.AddSeconds(PLAYER_WAIT_TIMEOUT).CompareTo(Now) < 0 Then
-                    players.Remove(players.Keys(i))
+        For i As Integer = players.Count - 1 To 0 Step -1
+            If players.Values(i).last_active_time.AddSeconds(PLAYER_WAIT_TIMEOUT).CompareTo(Now) < 0 Then
+                players.Remove(players.Keys(i))
+                If status = GameStatus.STARTED Or status = GameStatus.STARTING Then
+                    status = GameStatus.WAITING_PLAYERS
                 End If
-            Next
-        End If
+            End If
+        Next
     End Sub
 
     Public Function IsPlayerExist(ByVal name As String) As Boolean
@@ -83,7 +88,7 @@ Public Class Game
     End Sub
 
     Private players As Dictionary(Of String, Player)
-    Private PLAYER_WAIT_TIMEOUT As Integer = 5
+    Private PLAYER_WAIT_TIMEOUT As Integer = 10
     Private PLAYER_NUM As Integer = 2
     Public current_round As Round
 End Class

@@ -9,6 +9,7 @@
     <form id="form1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
+    <asp:Button ID="btn_quit" runat="server" Text="Гарах" />
     <div>
         Tоглогчид
         <hr />
@@ -21,13 +22,20 @@
                 </asp:Label>
                 <asp:Button id="btn_in" runat="server" Text="Орох" Visible="false" />
                 <asp:Button id="btn_out" runat="server" Text="Орохгүй" Visible="false" />
+                <asp:Panel ID="pnl_change" runat="server" Visible="false">
+                    <asp:CheckBoxList id="change_list" runat="server">                    
+                    </asp:CheckBoxList>
+                    <asp:Button ID="btn_change" runat="server" Text="Солих" />
+                </asp:Panel>
+
+
+                <asp:Timer ID="timer" runat="server" Interval="1000">
+                </asp:Timer>
             </ContentTemplate>
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="timer" EventName="Tick" />
             </Triggers>
         </asp:UpdatePanel>
-        <asp:Timer ID="timer" runat="server" Interval="1000">
-        </asp:Timer>
     </div>
     </form>
 </body>
