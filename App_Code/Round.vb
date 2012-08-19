@@ -65,8 +65,8 @@ Public Class Round
             'plr(dealer).hand.Add(huzur)
             who = dealer
             plr(who).hand(num(0)) = huzur
-
             status = RoundStatus.play
+            Return
         End If
 
         remain = remain - num.Count
