@@ -81,9 +81,11 @@ Public Class Round
         If remain = 0 Then
             status = RoundStatus.change_h
             who = dealer
+            Return
         End If
         If who = dealer Then
             status = RoundStatus.change_h
+            Return
         End If
         mext()
     End Sub
