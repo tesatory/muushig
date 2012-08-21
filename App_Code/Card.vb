@@ -62,4 +62,8 @@ Public Class Card
 
         Return "<img src='./Images/Cards/" & ret & ".gif'/>"
     End Function
+
+    Public Shared Function BackToHtmlImg() As String
+        Return "<img src='./Images/Cards/back.gif'/>"
+    End Function
 End Class

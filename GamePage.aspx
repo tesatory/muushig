@@ -18,17 +18,23 @@
                 <asp:Label ID="lbl_players_name" runat="server">
                 </asp:Label>
                 <hr />
-                Хөзөр: <br />
-                <asp:Label ID="lbl_huzur" runat="server">
-                </asp:Label>
+                Миний оноо: <asp:Label ID="my_score" runat="server"></asp:Label>
                 <br />
-                Гарын мод: 
+                Хөзөр<br />
+                <asp:Label ID="lbl_huzur" runat="server"></asp:Label>
+                <hr />
+                Газар <br />
+                <asp:Label ID="lbl_gazar" runat="server"></asp:Label>
+                <hr />
+                Гарын мод 
                 <br />
-                <asp:Label ID="my_hand" runat="server">
+                <asp:Label ID="my_hand" runat="server"></asp:Label>
+                <asp:Label ID="my_round_point" runat="server">
                 </asp:Label>
                 <br />
                 <asp:Button id="btn_in" runat="server" Text="Орох" Visible="false" />
-                <asp:Button id="btn_out" runat="server" Text="Орохгүй" Visible="false" />
+                <asp:Button id="btn_out" runat="server" Text="Өнжих" Visible="false" />
+
                 <asp:Panel ID="pnl_change" runat="server" Visible="false">
                     <asp:Label ID="lbl_remain" runat="server"></asp:Label>
                     <asp:CheckBoxList id="change_list" runat="server" RepeatDirection="Horizontal">                    
@@ -37,7 +43,6 @@
                 </asp:Panel>
 
                 <asp:Panel ID="pnl_play" runat="server" Visible="false">
-                    <asp:Label ID="lbl_gazar" runat="server"></asp:Label>
                     <asp:RadioButtonList  id="play_list" runat="server" RepeatDirection="Horizontal">                    
                     </asp:RadioButtonList>
                     <asp:Button ID="btn_play" runat="server" Text="Гарах" />

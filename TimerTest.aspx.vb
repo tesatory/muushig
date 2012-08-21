@@ -5,6 +5,7 @@ Partial Class TimerTest
     Protected Sub Page_Load(sender As Object, e As System.EventArgs) Handles Me.Load
         lbl.Text = Now.ToString
         lbl2.Text = Now.ToString
+        Threading.Thread.Sleep(5000)
     End Sub
 
     Protected Sub btn_off_Click(sender As Object, e As System.EventArgs) Handles btn_off.Click

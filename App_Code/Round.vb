@@ -6,6 +6,7 @@ Public Enum RoundStatus
     change_h
     play
     playing
+    fault
     finish
 End Enum
 
@@ -18,8 +19,8 @@ Public Class Round
     Public small As String
     Public beginplr As String
     Public gazar As Card
-    Public remain As Integer = 6
-    Public status As RoundStatus = RoundStatus.inout
+    Public remain As Integer
+    Public status As RoundStatus
 
 
     Public Sub New(ByVal _plr As List(Of Player), ByVal dlr As String)
@@ -30,10 +31,16 @@ Public Class Round
             plr.Add(p.name, p)
             p.hand.AddRange(deck.Deal(5))
         Next
+        If plr.Count = 2 Then
+            status = RoundStatus.change
+        Else
+            status = RoundStatus.inout
+        End If
         dealer = dlr
         who = dealer
         mext()
         huzur = deck.Deal(1)(0)
+        remain = deck.cards.Count
     End Sub
 
     Private Sub mext()
@@ -46,17 +53,29 @@ Public Class Round
     End Sub
 
     Public Sub inout(ByVal io As Boolean)
-        If io = False Then
-            plr.Remove(who)
-        End If
-        If plr.Count = 2 Then
-            status = RoundStatus.change
-            who = dealer
-        End If
+        Dim delete As String
+
         If who = dealer Then
             status = RoundStatus.change
         End If
-        mext()
+
+        If io = False Then
+            delete = who
+
+            If plr.Count = 3 Then
+                status = RoundStatus.change
+                who = dealer
+            End If
+
+            mext()
+            plr.Remove(delete)
+        Else
+            mext()
+        End If
+
+
+
+
     End Sub
 
     Public Sub change(ByVal num As List(Of Integer))
@@ -68,7 +87,13 @@ Public Class Round
             plr(who).hand(num(0)) = huzur
             status = RoundStatus.play
             mext()
-            small = who
+            'For i As Integer = 0 To plr.Count - 1
+            '    'plr(plr.Keys(i)).total_score -= plr(plr.Keys(i)).round_score
+            '    If plr(plr.Keys(i)).round_score = 0 Then
+            '        plr(plr.Keys(i)).total_score += 5
+            '    End If
+            '    plr(plr.Keys(i)).round_score = 0
+            'Next
             Return
         End If
 
@@ -98,7 +123,9 @@ Public Class Round
     Public Sub Play(ByVal num As Integer)
 
         If status = RoundStatus.play Then
-            beginplr = small
+            beginplr = who
+            small = who
+            
             If huzur.suit <> SuitType.Spade Then
                 gazar = New Card(1, SuitType.Spade)
             End If
@@ -114,13 +141,78 @@ Public Class Round
             If who = beginplr Then
                 If plr(who).hand.Count = 0 Then
                     status = RoundStatus.finish
+                    who = small
+                    plr(who).round_score += 1
+                    For i As Integer = 0 To plr.Count - 1
+                        plr(plr.Keys(i)).total_score -= plr(plr.Keys(i)).round_score
+
+                        If plr(plr.Keys(i)).round_score = 0 Then
+                            plr(plr.Keys(i)).total_score += 5
+                        End If
+                        plr(plr.Keys(i)).round_score = 0
+
+                    Next
+                    Return
                 End If
                 status = RoundStatus.play
+                who = small
+                plr(who).round_score += 1
+
             End If
         End If
     End Sub
 
+    Public Function card_can() As List(Of Integer)
+        Dim samba1 As New List(Of Integer)
+        Dim samba As New List(Of Integer)
+        Select Case status
+            Case RoundStatus.play
+                For i As Integer = 0 To plr(who).hand.Count - 1
+                    If plr(who).hand(i).suit = huzur.suit And plr(who).hand(i).rank = "14" Then
+                        samba.Add(i)
+                        Return samba
+                    End If
+                Next
+                For i As Integer = 0 To plr(who).hand.Count - 1
+                    samba.Add(i)
+                Next
+                Return samba
 
+            Case RoundStatus.playing
+                For i As Integer = 0 To plr(who).hand.Count - 1
+                    If plr(who).hand(i).suit = gazar.suit Then
+                        If plr(who).hand(i).suit = huzur.suit And plr(who).hand(i).rank > gazar.rank Then
+                            samba.Add(i)
+                        End If
+                        samba1.Add(i)
+                    End If
+                Next
+                If samba.Count <> 0 Then
+                    Return samba
+                ElseIf samba1.Count <> 0 Then
+                    Return samba1
+                End If
+
+                For i As Integer = 0 To plr(who).hand.Count - 1
+                    If plr(who).hand(i).suit = huzur.suit Then
+                        samba.Add(i)
+                    End If
+                    samba1.Add(i)
+                Next
+
+                If samba.Count <> 0 Then
+                    Return samba
+                Else
+                    Return samba1
+                End If
+
+            Case Else
+                For i As Integer = 0 To plr(who).hand.Count - 1
+                    samba.Add(i)
+                Next
+                Return samba
+        End Select
+    End Function
 
     Private Sub Up(ByVal card1 As Card, ByVal card2 As Card) ', ByVal num As Integer)
         If huzur.suit = card1.suit Then
