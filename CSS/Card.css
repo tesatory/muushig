@@ -1,0 +1,79 @@
+﻿.cards_holder
+{
+    float:none;
+    height:96px;
+}
+
+.cards_holder div
+{
+    width:71px;
+    height:96px;
+    float:left;
+}
+
+.card_back 
+{
+    background-image:url("../Images/Cards/back.gif");
+}
+
+.card_back_half
+{
+    width:10px !important;
+    background-image:url("../Images/Cards/back.gif");
+}
+
+.card_102{background-image:url("../Images/Cards/102.gif");}
+.card_103{background-image:url("../Images/Cards/103.gif");}
+.card_104{background-image:url("../Images/Cards/104.gif");}
+.card_105{background-image:url("../Images/Cards/105.gif");}
+.card_106{background-image:url("../Images/Cards/106.gif");}
+.card_107{background-image:url("../Images/Cards/107.gif");}
+.card_108{background-image:url("../Images/Cards/108.gif");}
+.card_109{background-image:url("../Images/Cards/109.gif");}
+.card_110{background-image:url("../Images/Cards/110.gif");}
+.card_111{background-image:url("../Images/Cards/111.gif");}
+.card_112{background-image:url("../Images/Cards/112.gif");}
+.card_113{background-image:url("../Images/Cards/113.gif");}
+.card_114{background-image:url("../Images/Cards/114.gif");}
+
+.card_202{background-image:url("../Images/Cards/202.gif");}
+.card_203{background-image:url("../Images/Cards/203.gif");}
+.card_204{background-image:url("../Images/Cards/204.gif");}
+.card_205{background-image:url("../Images/Cards/205.gif");}
+.card_206{background-image:url("../Images/Cards/206.gif");}
+.card_207{background-image:url("../Images/Cards/207.gif");}
+.card_208{background-image:url("../Images/Cards/208.gif");}
+.card_209{background-image:url("../Images/Cards/209.gif");}
+.card_210{background-image:url("../Images/Cards/210.gif");}
+.card_211{background-image:url("../Images/Cards/211.gif");}
+.card_212{background-image:url("../Images/Cards/212.gif");}
+.card_213{background-image:url("../Images/Cards/213.gif");}
+.card_214{background-image:url("../Images/Cards/214.gif");}
+
+.card_302{background-image:url("../Images/Cards/302.gif");}
+.card_303{background-image:url("../Images/Cards/303.gif");}
+.card_304{background-image:url("../Images/Cards/304.gif");}
+.card_305{background-image:url("../Images/Cards/305.gif");}
+.card_306{background-image:url("../Images/Cards/306.gif");}
+.card_307{background-image:url("../Images/Cards/307.gif");}
+.card_308{background-image:url("../Images/Cards/308.gif");}
+.card_309{background-image:url("../Images/Cards/309.gif");}
+.card_310{background-image:url("../Images/Cards/310.gif");}
+.card_311{background-image:url("../Images/Cards/311.gif");}
+.card_312{background-image:url("../Images/Cards/312.gif");}
+.card_313{background-image:url("../Images/Cards/313.gif");}
+.card_314{background-image:url("../Images/Cards/314.gif");}
+
+.card_402{background-image:url("../Images/Cards/402.gif");}
+.card_403{background-image:url("../Images/Cards/403.gif");}
+.card_404{background-image:url("../Images/Cards/404.gif");}
+.card_405{background-image:url("../Images/Cards/405.gif");}
+.card_406{background-image:url("../Images/Cards/406.gif");}
+.card_407{background-image:url("../Images/Cards/407.gif");}
+.card_408{background-image:url("../Images/Cards/408.gif");}
+.card_409{background-image:url("../Images/Cards/409.gif");}
+.card_410{background-image:url("../Images/Cards/410.gif");}
+.card_411{background-image:url("../Images/Cards/411.gif");}
+.card_412{background-image:url("../Images/Cards/412.gif");}
+.card_413{background-image:url("../Images/Cards/413.gif");}
+.card_414{background-image:url("../Images/Cards/414.gif");}

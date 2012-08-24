@@ -4,6 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Муушиг</title>
+    <link rel="Stylesheet" type="text/css" href="CSS/Common.css" />
+    <link rel="Stylesheet" type="text/css" href="CSS/Card.css" />
 </head>
 <body>
     <form id="form1" runat="server">
@@ -17,8 +19,6 @@
             <ContentTemplate>
                 <asp:Label ID="lbl_players_name"  runat="server">
                 </asp:Label>
-                <hr />
-                Миний оноо: <asp:Label ID="my_score" runat="server"></asp:Label>
                 <br />
                 Хөзөр<br />
                 <asp:Label ID="lbl_huzur" runat="server"></asp:Label>

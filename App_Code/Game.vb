@@ -29,29 +29,12 @@ Public Class Game
         players.Remove(p.name)
     End Sub
 
-    Public Function GetPlayersList() As String
-        Dim sb As New StringBuilder
+    Public Function GetPlayersList() As List(Of Player)
+        Dim l As New List(Of Player)
         For Each p As Player In players.Values
-            sb.Append(p.name)
-            If p.status = PlayerStatus.IN_GAME Then
-                sb.Append(" [холбогдсон]")
-            End If
-            If Not current_round Is Nothing Then
-                If current_round.dealer = p.name Then
-                    sb.Append(" [Ажил хийсэн]")
-                End If
-                If current_round.plr.ContainsKey(p.name) = False Then
-                    sb.Append(" [өнжсөн]")
-                End If
-                If current_round.who = p.name Then
-                    sb.Append(" [Ээлж]")
-                End If
-                sb.Append(" Оноо ")
-                sb.Append(p.total_score)
-            End If
-            sb.Append("<br/>")
+            l.Add(p)
         Next
-        Return sb.ToString
+        Return l
     End Function
 
     Public Function IsReadyToStart() As Boolean

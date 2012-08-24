@@ -1,0 +1,21 @@
+﻿body {
+}
+
+#players_status
+{
+    width:100%;
+    border-collapse:collapse;
+    background-color:#CCCCCC;
+}
+#players_status th
+{
+    width:200px;
+    border:1px solid #666;
+    text-align:left;
+}
+#players_status td
+{
+    border:1px solid #666;
+    text-align:center;
+    background-color:#EEEEEE;
+}

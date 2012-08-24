@@ -23,7 +23,10 @@ Partial Class Start
             game.AddPlayer(player)
         End If
 
-        lbl_players_name.Text = game.GetPlayersList
+        lbl_players_name.Text = ""
+        For Each p As Player In game.GetPlayersList()
+            lbl_players_name.Text = p.name & "<br/>"
+        Next
 
         If game.IsReadyToStart Then
             btn_start.Enabled = True

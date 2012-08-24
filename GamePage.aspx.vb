@@ -16,24 +16,82 @@ Partial Class GamePage
 
         player.last_active_time = Now
 
+        UpdatePlayersStatus()
         UpdateGameStatus()
         UpdateRoundStatus()
     End Sub
 
     Private Sub UpdateGameStatus()
-        lbl_players_name.Text = game.GetPlayersList
-        
-        my_hand.Text = ""
-        For Each c As Card In player.hand
-            my_hand.Text &= c.ToHtmlImg & "  "
-        Next
+    End Sub
 
-        my_round_point.Text = ""
-        For i As Integer = 1 To player.round_score
-            my_round_point.Text &= Card.BackToHtmlImg & "  "
-        Next
+    Private Sub UpdatePlayersStatus()
+        Dim sb As New StringBuilder
+        sb.AppendLine("<table id='players_status'>")
 
-        my_score.Text = player.total_score
+        sb.AppendLine("<tr>")
+        sb.AppendLine("<th></th>")
+        For Each p As Player In game.GetPlayersList
+            sb.AppendLine("<td>")
+            sb.AppendLine(p.name)
+            sb.AppendLine("</td>")
+        Next
+        sb.AppendLine("</tr>")
+
+        sb.AppendLine("<tr>")
+        sb.AppendLine("<th>Холбогдсон</th>")
+        For Each p As Player In game.GetPlayersList
+            sb.AppendLine("<td>")
+            If p.status = PlayerStatus.IN_GAME Then
+                sb.AppendLine("тийм")
+            End If
+            sb.AppendLine("</td>")
+        Next
+        sb.AppendLine("</tr>")
+
+        sb.AppendLine("<tr>")
+        sb.AppendLine("<th>Ажил хийсэн</th>")
+        For Each p As Player In game.GetPlayersList
+            sb.AppendLine("<td>")
+            If p.name = game.current_round.dealer Then
+                sb.AppendLine("тийм")
+            End If
+            sb.AppendLine("</td>")
+        Next
+        sb.AppendLine("</tr>")
+
+        sb.AppendLine("<tr>")
+        sb.AppendLine("<th>өнжсөн</th>")
+        For Each p As Player In game.GetPlayersList
+            sb.AppendLine("<td>")
+            If game.current_round.plr.ContainsKey(p.name) = False Then
+                sb.AppendLine("тийм")
+            End If
+            sb.AppendLine("</td>")
+        Next
+        sb.AppendLine("</tr>")
+
+        sb.AppendLine("<tr>")
+        sb.AppendLine("<th>Ээлж</th>")
+        For Each p As Player In game.GetPlayersList
+            sb.AppendLine("<td>")
+            If game.current_round.who = p.name Then
+                sb.AppendLine("тийм")
+            End If
+            sb.AppendLine("</td>")
+        Next
+        sb.AppendLine("</tr>")
+
+        sb.AppendLine("<tr>")
+        sb.AppendLine("<th>Оноо</th>")
+        For Each p As Player In game.GetPlayersList
+            sb.AppendLine("<td>")
+            sb.AppendLine(p.total_score)
+            sb.AppendLine("</td>")
+        Next
+        sb.AppendLine("</tr>")
+
+        sb.AppendLine("</table>")
+        lbl_players_name.Text = sb.ToString
     End Sub
 
     Private Sub UpdateRoundStatus()
@@ -41,23 +99,41 @@ Partial Class GamePage
             Return
         End If
 
+        my_hand.Text = "<div class='cards_holder'>"
+        For Each c As Card In player.hand
+            my_hand.Text &= "<div class='card_" & c.ToCode & "'></div>"
+        Next
+
+        For i As Integer = 1 To player.round_score
+            my_hand.Text &= "<div class='card_back'></div>"
+        Next
+        my_hand.Text &= "</div>"
+
+        lbl_huzur.Text = "<div class='cards_holder'>"
         If Not game.current_round.huzur Is Nothing Then
-            lbl_huzur.Text = game.current_round.huzur.ToHtmlImg
+            lbl_huzur.Text &= "<div class='card_" & game.current_round.huzur.ToCode & "'></div>"
         Else
-            lbl_huzur.Text = Card.BackToHtmlImg
+            lbl_huzur.Text &= "<div class='card_back'></div>"
         End If
+        lbl_huzur.Text &= "</div>"
 
 
         If Not game.current_round.gazar Is Nothing Then
-            lbl_gazar.Text = "  "
+            lbl_gazar.Text = "<div class='cards_holder'>"
             For i As Integer = 0 To game.current_round.hayasan_mod.Count - 1
-                lbl_gazar.Text &= game.current_round.hayasan_mod(i).ToHtmlImg & "  "
+                lbl_gazar.Text &= "<div class='card_" & game.current_round.hayasan_mod(i).ToCode & "'></div>"
             Next
+            lbl_gazar.Text &= "</div>"
         Else
-            lbl_gazar.Text = ""
+            lbl_gazar.Text = "<div class='cards_holder'>"
             For i As Integer = 1 To game.current_round.remain
-                lbl_gazar.Text &= Card.BackToHtmlImg & "  "
+                If i < game.current_round.remain Then
+                    lbl_gazar.Text &= "<div class='card_back_half'></div>"
+                Else
+                    lbl_gazar.Text &= "<div class='card_back'></div>"
+                End If
             Next
+            lbl_gazar.Text &= "</div>"
         End If
 
 
