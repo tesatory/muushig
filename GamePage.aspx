@@ -3,19 +3,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Муушиг</title>
 </head>
 <body>
     <form id="form1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
-    <asp:Button ID="btn_quit" runat="server" Text="Гарах" />
+    <asp:Button ID="btn_quit" runat="server" Text="Тоглоомноос Гарах" />
     <div>
         Tоглогчид
         <hr />
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
-                <asp:Label ID="lbl_players_name" runat="server">
+                <asp:Label ID="lbl_players_name"  runat="server">
                 </asp:Label>
                 <hr />
                 Миний оноо: <asp:Label ID="my_score" runat="server"></asp:Label>
@@ -26,7 +26,7 @@
                 Газар <br />
                 <asp:Label ID="lbl_gazar" runat="server"></asp:Label>
                 <hr />
-                Гарын мод 
+                Өөрийн мод 
                 <br />
                 <asp:Label ID="my_hand" runat="server"></asp:Label>
                 <asp:Label ID="my_round_point" runat="server">

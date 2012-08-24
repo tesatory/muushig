@@ -46,6 +46,8 @@ Public Class Game
                 If current_round.who = p.name Then
                     sb.Append(" [Ээлж]")
                 End If
+                sb.Append(" Оноо ")
+                sb.Append(p.total_score)
             End If
             sb.Append("<br/>")
         Next
@@ -53,7 +55,7 @@ Public Class Game
     End Function
 
     Public Function IsReadyToStart() As Boolean
-        If players.Count = PLAYER_NUM Then
+        If players.Count >= MIN_PLAYER_NUM Then
             Return True
         Else
             Return False
@@ -118,6 +120,6 @@ Public Class Game
 
     Private players As Dictionary(Of String, Player)
     Private PLAYER_WAIT_TIMEOUT As Integer = 10
-    Private PLAYER_NUM As Integer = 4
+    Private MIN_PLAYER_NUM As Integer = 2
     Public current_round As Round
 End Class

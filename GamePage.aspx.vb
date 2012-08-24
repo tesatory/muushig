@@ -4,9 +4,11 @@ Partial Class GamePage
     Private player As Player
     Private game As Game
 
+
     Protected Sub Page_Load(sender As Object, e As System.EventArgs) Handles Me.Load
         player = Session("player")
         game = Application("game")
+
 
         If (game Is Nothing) Or (player Is Nothing) Then
             Response.Redirect("./Start.aspx")
@@ -20,7 +22,7 @@ Partial Class GamePage
 
     Private Sub UpdateGameStatus()
         lbl_players_name.Text = game.GetPlayersList
-
+        
         my_hand.Text = ""
         For Each c As Card In player.hand
             my_hand.Text &= c.ToHtmlImg & "  "
@@ -47,7 +49,10 @@ Partial Class GamePage
 
 
         If Not game.current_round.gazar Is Nothing Then
-            lbl_gazar.Text = game.current_round.gazar.ToHtmlImg
+            lbl_gazar.Text = "  "
+            For i As Integer = 0 To game.current_round.hayasan_mod.Count - 1
+                lbl_gazar.Text &= game.current_round.hayasan_mod(i).ToHtmlImg & "  "
+            Next
         Else
             lbl_gazar.Text = ""
             For i As Integer = 1 To game.current_round.remain
