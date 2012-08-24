@@ -44,4 +44,26 @@ Public Class Card
 
         Return ret
     End Function
+
+    Public Function ToHtmlImg() As String
+        Dim ret As Integer = 0
+        ret = rank
+
+        Select Case suit
+            Case SuitType.Club
+                ret += 100
+            Case SuitType.Diamond
+                ret += 200
+            Case SuitType.Heart
+                ret += 300
+            Case SuitType.Spade
+                ret += 400
+        End Select
+
+        Return "<img src='./Images/Cards/" & ret & ".gif'/>"
+    End Function
+
+    Public Shared Function BackToHtmlImg() As String
+        Return "<img src='./Images/Cards/back.gif'/>"
+    End Function
 End Class

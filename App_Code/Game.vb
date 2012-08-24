@@ -10,10 +10,13 @@ End Enum
 Public Class Game
 
     Public status As GameStatus
+    Public dealer_ind As Integer
+    Private rand As Random
 
     Public Sub New()
         players = New Dictionary(Of String, Player)
         status = GameStatus.WAITING_PLAYERS
+        rand = New Random
     End Sub
 
     Public Sub AddPlayer(ByVal p As Player)
@@ -31,7 +34,20 @@ Public Class Game
         For Each p As Player In players.Values
             sb.Append(p.name)
             If p.status = PlayerStatus.IN_GAME Then
-                sb.Append(" [Тоглоомонд орсон]")
+                sb.Append(" [холбогдсон]")
+            End If
+            If Not current_round Is Nothing Then
+                If current_round.dealer = p.name Then
+                    sb.Append(" [Ажил хийсэн]")
+                End If
+                If current_round.plr.ContainsKey(p.name) = False Then
+                    sb.Append(" [өнжсөн]")
+                End If
+                If current_round.who = p.name Then
+                    sb.Append(" [Ээлж]")
+                End If
+                sb.Append(" Оноо ")
+                sb.Append(p.total_score)
             End If
             sb.Append("<br/>")
         Next
@@ -39,7 +55,7 @@ Public Class Game
     End Function
 
     Public Function IsReadyToStart() As Boolean
-        If players.Count = PLAYER_NUM Then
+        If players.Count >= MIN_PLAYER_NUM Then
             Return True
         Else
             Return False
@@ -82,13 +98,28 @@ Public Class Game
         For Each p In players.Values
             plr.Add(p)
         Next
-        current_round = New Round(plr, players.Keys(0))
+        dealer_ind = rand.Next Mod plr.Count
+        current_round = New Round(plr, players.Keys(dealer_ind))
 
         status = GameStatus.STARTED
     End Sub
 
+    Public Sub RoundFinished()
+        Dim plr As New List(Of Player)
+        For Each p In players.Values
+            If p.total_score <= 0 Then GameFinished()
+            plr.Add(p)
+        Next
+        dealer_ind = (dealer_ind + 1) Mod plr.Count
+        current_round = New Round(plr, players.Keys(dealer_ind))
+    End Sub
+
+    Public Sub GameFinished()
+
+    End Sub
+
     Private players As Dictionary(Of String, Player)
     Private PLAYER_WAIT_TIMEOUT As Integer = 10
-    Private PLAYER_NUM As Integer = 2
+    Private MIN_PLAYER_NUM As Integer = 2
     Public current_round As Round
 End Class
