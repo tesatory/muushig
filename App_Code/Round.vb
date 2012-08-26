@@ -28,10 +28,12 @@ Public Class Round
     Public Sub New(ByVal _plr As List(Of Player), ByVal dlr As String)
         hayasan_mod = New Stack(Of Card)
         plr = New Dictionary(Of String, Player)
+        For Each p As Player In _plr
+            plr.Add(p.name, p)
+        Next
         deck = New Deck
         deck.Shuffle()
         For Each p As Player In _plr
-            plr.Add(p.name, p)
             p.hand.Clear()
             p.hand.AddRange(deck.Deal(5))
         Next

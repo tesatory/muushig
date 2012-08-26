@@ -3,11 +3,24 @@ Imports System.Collections.Generic
 
 Public Class Deck
     Public cards As Stack(Of Card)
-
+    Public card_limit As Integer
+    Public plr1 As Dictionary(Of String, Player)
+    
 
     Public Sub New()
         cards = New Stack(Of Card)
-        For i As Integer = 7 To 14
+
+        'Select Case plr1.Count
+        '    Case 2
+        '        card_limit = 11
+        '    Case 3
+        '        card_limit = 9
+        '    Case 4
+        '        card_limit = 8
+        '    Case Else
+        '        card_limit = 7
+        'End Select
+        For i As Integer = card_limit To 14
             cards.Push(New Card(i, SuitType.Club))
             cards.Push(New Card(i, SuitType.Diamond))
             cards.Push(New Card(i, SuitType.Heart))
