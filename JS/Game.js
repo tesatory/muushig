@@ -11,7 +11,9 @@
     var card;
     for (i = 0; i < cards.length; i++) {
         if (cards[i].value == code) {
-            cards[i].checked = !cards[i].checked;
+            if (cards[i].disabled == false) {
+                cards[i].checked = !cards[i].checked;
+            }
         }
     }
 

@@ -83,23 +83,6 @@ Partial Class GamePage
             Return
         End If
 
-        my_hand.Text = "<div class='cards_container'>"
-        For Each c As Card In player.hand
-            my_hand.Text &= "<div class='card_holder'>"
-            my_hand.Text &= "<div class='card_" & c.ToCode & "'"
-            my_hand.Text &= " style='cursor:pointer;'"
-            my_hand.Text &= " id='handcard_" & c.ToCode & "'"
-            my_hand.Text &= " onclick=""cardClick(this,'" & c.ToCode & "')""></div>"
-            my_hand.Text &= "</div>"
-        Next
-
-        For i As Integer = 1 To player.round_score
-            my_hand.Text &= "<div class='card_holder'>"
-            my_hand.Text &= "<div class='card_back'></div>"
-            my_hand.Text &= "</div>"
-        Next
-        my_hand.Text &= "</div>"
-
         lbl_huzur.Text = "<div class='cards_container'>"
         If Not game.current_round.huzur Is Nothing Then
             lbl_huzur.Text &= "<div class='card_holder'>"
@@ -151,6 +134,8 @@ Partial Class GamePage
                             change_list.Items.Add(New ListItem(player.hand(i).ToString, player.hand(i).ToCode))
                         Next
                         timer.Enabled = False
+                        min_card_num.Value = 0
+                        max_card_num.Value = Math.Min(player.hand.Count, game.current_round.remain)
                     End If
                 Case RoundStatus.change_h
                     If pnl_change.Visible = False Then
@@ -161,6 +146,8 @@ Partial Class GamePage
                             change_list.Items.Add(New ListItem(player.hand(i).ToString, player.hand(i).ToCode))
                         Next
                         timer.Enabled = False
+                        min_card_num.Value = 0
+                        max_card_num.Value = 1
                     End If
                 Case RoundStatus.play, RoundStatus.playing
                     If pnl_play.Visible = False Then
@@ -180,12 +167,37 @@ Partial Class GamePage
                         Next
 
                         timer.Enabled = False
+                        min_card_num.Value = 1
+                        max_card_num.Value = 1
                     End If
 
                 Case RoundStatus.finish
                     game.RoundFinished()
             End Select
         End If
+
+        my_hand.Text = "<div class='cards_container'>"
+        For i As Integer = 0 To player.hand.Count - 1
+            If pnl_change.Visible AndAlso change_list.Items(i).Selected Then
+                my_hand.Text &= "<div class='card_holder_selected'>"
+            ElseIf pnl_play.Visible AndAlso play_list.Items(i).Selected Then
+                my_hand.Text &= "<div class='card_holder_selected'>"
+            Else
+                my_hand.Text &= "<div class='card_holder'>"
+            End If
+            my_hand.Text &= "<div class='card_" & player.hand(i).ToCode & "'"
+            my_hand.Text &= " style='cursor:pointer;'"
+            my_hand.Text &= " id='handcard_" & player.hand(i).ToCode & "'"
+            my_hand.Text &= " onclick=""cardClick(this,'" & player.hand(i).ToCode & "')""></div>"
+            my_hand.Text &= "</div>"
+        Next
+
+        For i As Integer = 1 To player.round_score
+            my_hand.Text &= "<div class='card_holder'>"
+            my_hand.Text &= "<div class='card_back'></div>"
+            my_hand.Text &= "</div>"
+        Next
+        my_hand.Text &= "</div>"
     End Sub
 
     Protected Sub btn_in_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btn_in.Click

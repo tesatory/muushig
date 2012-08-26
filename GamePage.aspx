@@ -30,6 +30,7 @@
                                         <td>
                                             <asp:Label ID="lbl_huzur" runat="server"></asp:Label>
                                         </td>
+                                        <td width="50px"></td>
                                         <td>
                                             <asp:Label ID="lbl_gazar" runat="server"></asp:Label>
                                         </td>
@@ -47,18 +48,24 @@
                             <asp:Button ID="btn_out" runat="server" Text="Өнжих" Visible="false" />
                             <asp:Panel ID="pnl_change" runat="server" Visible="false">
                                 <asp:Label ID="lbl_remain" runat="server"></asp:Label>
+                                <div style="display:none;">
                                 <asp:CheckBoxList ID="change_list" runat="server" RepeatDirection="Horizontal">
                                 </asp:CheckBoxList>
+                                </div>
                                 <asp:Button ID="btn_change" runat="server" Text="Солих" />
                             </asp:Panel>
                             <asp:Panel ID="pnl_play" runat="server" Visible="false">
+                                <div style="display:none;">
                                 <asp:RadioButtonList ID="play_list" runat="server" RepeatDirection="Horizontal">
                                 </asp:RadioButtonList>
+                                </div>
                                 <asp:Button ID="btn_play" runat="server" Text="Гарах" />
                             </asp:Panel>
                             </div>
                             <asp:Timer ID="timer" runat="server" Interval="1000">
                             </asp:Timer>
+                            <asp:HiddenField ID="min_card_num" runat="server" />
+                            <asp:HiddenField ID="max_card_num" runat="server" />
                         </ContentTemplate>
                         <Triggers>
                             <asp:AsyncPostBackTrigger ControlID="timer" EventName="Tick" />
