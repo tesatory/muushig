@@ -1,14 +1,30 @@
-﻿.cards_holder
+﻿.cards_container
 {
     float:none;
     height:96px;
 }
 
-.cards_holder div
+.card_holder
+{
+    float:left;
+}
+
+.card_holder div
 {
     width:71px;
     height:96px;
+}
+
+.card_holder_selected
+{
     float:left;
+    border-bottom:20px solid green;
+}
+
+.card_holder_selected div
+{
+    width:71px;
+    height:76px;
 }
 
 .card_back 

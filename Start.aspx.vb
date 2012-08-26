@@ -19,13 +19,13 @@ Partial Class Start
         game = Application("game")
         game.ClearInactivePlayers()
 
-        If game.IsPlayerExist(player.name) = False Then
+        If game.players.Contains(player) = False Then
             game.AddPlayer(player)
         End If
 
         lbl_players_name.Text = ""
-        For Each p As Player In game.GetPlayersList()
-            lbl_players_name.Text = p.name & "<br/>"
+        For Each p As Player In game.players
+            lbl_players_name.Text &= p.name & "<br/>"
         Next
 
         If game.IsReadyToStart Then
@@ -39,5 +39,11 @@ Partial Class Start
         player.status = PlayerStatus.IN_GAME
         game.PlayerReady()
         Response.Redirect("./GamePage.aspx")
+    End Sub
+
+    Protected Sub btn_logout_Click(sender As Object, e As System.EventArgs) Handles btn_logout.Click
+        game.players.Remove(player)
+        Session.Remove("player")
+        Response.Redirect("./CreatePlayer.aspx")
     End Sub
 End Class

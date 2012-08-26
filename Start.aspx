@@ -18,6 +18,7 @@
     </asp:Label>
     <hr />
     <asp:Button ID="btn_start" runat="server" Text="Тоглолтыг эхлэх" />
+    <asp:Button ID="btn_logout" runat="server" Text="Гарах" />
     </ContentTemplate>
     <Triggers>
     <asp:AsyncPostBackTrigger ControlID="timer" EventName="Tick" />

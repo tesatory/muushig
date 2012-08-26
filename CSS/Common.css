@@ -1,21 +1,46 @@
-﻿body {
+﻿body 
+{
+    font-family:Verdana;
+    font-size:12px;
 }
 
+#game_table
+{
+    width:600px;
+    background-color:#F4F7EC;
+    padding:10px;
+    border:2px solid #CDDB9D;
+}
+
+
 #players_status
-{
-    width:100%;
+{   
     border-collapse:collapse;
-    background-color:#CCCCCC;
+    width:100%;
 }
-#players_status th
-{
-    width:200px;
-    border:1px solid #666;
-    text-align:left;
-}
+
 #players_status td
-{
-    border:1px solid #666;
-    text-align:center;
-    background-color:#EEEEEE;
+{   
+    border-bottom:1px solid #CDDB9D;
+    padding:5px;
 }
+
+#players_status th
+{   
+    text-align:left;
+    border-bottom:2px solid #CDDB9D;
+    padding:5px;
+}
+
+#center_part
+{
+    float:none;    
+    margin-left:50px;
+}
+
+#hand_part
+{
+    float:none;    
+    margin:20px 0px 0px 50px;
+}
+

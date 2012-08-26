@@ -26,112 +26,111 @@ Partial Class GamePage
 
     Private Sub UpdatePlayersStatus()
         Dim sb As New StringBuilder
-        sb.AppendLine("<table id='players_status'>")
 
+        sb.Append("<table id='players_status'>")
         sb.AppendLine("<tr>")
-        sb.AppendLine("<th></th>")
-        For Each p As Player In game.GetPlayersList
-            sb.AppendLine("<td>")
-            sb.AppendLine(p.name)
-            sb.AppendLine("</td>")
-        Next
-        sb.AppendLine("</tr>")
-
-        sb.AppendLine("<tr>")
-        sb.AppendLine("<th>Холбогдсон</th>")
-        For Each p As Player In game.GetPlayersList
-            sb.AppendLine("<td>")
-            If p.status = PlayerStatus.IN_GAME Then
-                sb.AppendLine("тийм")
-            End If
-            sb.AppendLine("</td>")
-        Next
-        sb.AppendLine("</tr>")
-
-        sb.AppendLine("<tr>")
-        sb.AppendLine("<th>Ажил хийсэн</th>")
-        For Each p As Player In game.GetPlayersList
-            sb.AppendLine("<td>")
-            If p.name = game.current_round.dealer Then
-                sb.AppendLine("тийм")
-            End If
-            sb.AppendLine("</td>")
-        Next
-        sb.AppendLine("</tr>")
-
-        sb.AppendLine("<tr>")
-        sb.AppendLine("<th>өнжсөн</th>")
-        For Each p As Player In game.GetPlayersList
-            sb.AppendLine("<td>")
-            If game.current_round.plr.ContainsKey(p.name) = False Then
-                sb.AppendLine("тийм")
-            End If
-            sb.AppendLine("</td>")
-        Next
-        sb.AppendLine("</tr>")
-
-        sb.AppendLine("<tr>")
-        sb.AppendLine("<th>Ээлж</th>")
-        For Each p As Player In game.GetPlayersList
-            sb.AppendLine("<td>")
-            If game.current_round.who = p.name Then
-                sb.AppendLine("тийм")
-            End If
-            sb.AppendLine("</td>")
-        Next
-        sb.AppendLine("</tr>")
-
-        sb.AppendLine("<tr>")
+        sb.AppendLine("<th>Нэр</th>")
         sb.AppendLine("<th>Оноо</th>")
-        For Each p As Player In game.GetPlayersList
-            sb.AppendLine("<td>")
-            sb.AppendLine(p.total_score)
-            sb.AppendLine("</td>")
-        Next
+        sb.AppendLine("<th></th>")
+        sb.AppendLine("<th></th>")
+        sb.AppendLine("<th></th>")
         sb.AppendLine("</tr>")
+        For Each p In game.players
+            sb.AppendLine("<tr>")
+            sb.Append(GetPlayerStatus(p))
+            sb.AppendLine("</tr>")
+        Next
 
         sb.AppendLine("</table>")
+
         lbl_players_name.Text = sb.ToString
     End Sub
+
+    Private Function GetPlayerStatus(p As Player) As String
+        Dim sb As New StringBuilder
+        sb.Append("<td>")
+        sb.Append(p.name)
+        sb.Append("</td>")
+        sb.Append("<td>")
+        sb.Append(p.total_score)
+        sb.Append("</td>")
+        sb.Append("<td>")
+        If Not game.current_round Is Nothing Then
+            If p.name = game.current_round.dealer Then
+                sb.Append("ажил")
+            End If
+        End If
+        sb.Append("</td>")
+        sb.Append("<td>")
+        If Not game.current_round Is Nothing Then
+            If game.current_round.plr.ContainsKey(p.name) = False Then
+                sb.Append("өнжсөн")
+            End If
+        End If
+        sb.Append("</td>")
+        sb.Append("<td>")
+        If Not game.current_round Is Nothing Then
+            If game.current_round.who = p.name Then
+                sb.Append("ээлж")
+            End If
+        End If
+        sb.Append("</td>")
+        Return sb.ToString
+    End Function
 
     Private Sub UpdateRoundStatus()
         If game.current_round Is Nothing Then
             Return
         End If
 
-        my_hand.Text = "<div class='cards_holder'>"
+        my_hand.Text = "<div class='cards_container'>"
         For Each c As Card In player.hand
-            my_hand.Text &= "<div class='card_" & c.ToCode & "'></div>"
+            my_hand.Text &= "<div class='card_holder'>"
+            my_hand.Text &= "<div class='card_" & c.ToCode & "'"
+            my_hand.Text &= " style='cursor:pointer;'"
+            my_hand.Text &= " id='handcard_" & c.ToCode & "'"
+            my_hand.Text &= " onclick=""cardClick(this,'" & c.ToCode & "')""></div>"
+            my_hand.Text &= "</div>"
         Next
 
         For i As Integer = 1 To player.round_score
+            my_hand.Text &= "<div class='card_holder'>"
             my_hand.Text &= "<div class='card_back'></div>"
+            my_hand.Text &= "</div>"
         Next
         my_hand.Text &= "</div>"
 
-        lbl_huzur.Text = "<div class='cards_holder'>"
+        lbl_huzur.Text = "<div class='cards_container'>"
         If Not game.current_round.huzur Is Nothing Then
+            lbl_huzur.Text &= "<div class='card_holder'>"
             lbl_huzur.Text &= "<div class='card_" & game.current_round.huzur.ToCode & "'></div>"
+            lbl_huzur.Text &= "</div>"
         Else
+            lbl_huzur.Text &= "<div class='card_holder'>"
             lbl_huzur.Text &= "<div class='card_back'></div>"
+            lbl_huzur.Text &= "</div>"
         End If
         lbl_huzur.Text &= "</div>"
 
 
         If Not game.current_round.gazar Is Nothing Then
-            lbl_gazar.Text = "<div class='cards_holder'>"
+            lbl_gazar.Text = "<div class='cards_container'>"
             For i As Integer = 0 To game.current_round.hayasan_mod.Count - 1
+                lbl_gazar.Text &= "<div class='card_holder'>"
                 lbl_gazar.Text &= "<div class='card_" & game.current_round.hayasan_mod(i).ToCode & "'></div>"
+                lbl_gazar.Text &= "</div>"
             Next
             lbl_gazar.Text &= "</div>"
         Else
-            lbl_gazar.Text = "<div class='cards_holder'>"
+            lbl_gazar.Text = "<div class='cards_container'>"
             For i As Integer = 1 To game.current_round.remain
+                lbl_gazar.Text &= "<div class='card_holder'>"
                 If i < game.current_round.remain Then
                     lbl_gazar.Text &= "<div class='card_back_half'></div>"
                 Else
                     lbl_gazar.Text &= "<div class='card_back'></div>"
                 End If
+                lbl_gazar.Text &= "</div>"
             Next
             lbl_gazar.Text &= "</div>"
         End If
@@ -149,7 +148,7 @@ Partial Class GamePage
                         lbl_remain.Text = game.current_round.remain & " мод үлдсэн байна"
                         change_list.Items.Clear()
                         For i As Integer = 0 To player.hand.Count - 1
-                            change_list.Items.Add(New ListItem(player.hand(i).ToString, i))
+                            change_list.Items.Add(New ListItem(player.hand(i).ToString, player.hand(i).ToCode))
                         Next
                         timer.Enabled = False
                     End If
@@ -159,7 +158,7 @@ Partial Class GamePage
                         lbl_remain.Text = "Газрын модоо авна уу"
                         change_list.Items.Clear()
                         For i As Integer = 0 To player.hand.Count - 1
-                            change_list.Items.Add(New ListItem(player.hand(i).ToString, i))
+                            change_list.Items.Add(New ListItem(player.hand(i).ToString, player.hand(i).ToCode))
                         Next
                         timer.Enabled = False
                     End If
@@ -169,7 +168,7 @@ Partial Class GamePage
                         play_list.Items.Clear()
                         Dim possible_cards As List(Of Integer) = game.current_round.card_can
                         For i As Integer = 0 To player.hand.Count - 1
-                            Dim item As New ListItem(player.hand(i).ToString, i)
+                            Dim item As New ListItem(player.hand(i).ToString, player.hand(i).ToCode)
                             If possible_cards.Contains(i) = False Then item.Enabled = False
                             play_list.Items.Add(item)
                         Next
