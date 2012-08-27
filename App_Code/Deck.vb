@@ -5,21 +5,23 @@ Public Class Deck
     Public cards As Stack(Of Card)
     Public card_limit As Integer
     Public plr1 As Dictionary(Of String, Player)
-    
+    Public num As Integer
+    'Public number As Integer
 
-    Public Sub New()
+    Public Sub New(ByVal number1 As Integer)
         cards = New Stack(Of Card)
+        num = number1
+        Select Case num
+            Case 2
+                card_limit = 11
+            Case 3
+                card_limit = 9
+            Case 4
+                card_limit = 8
+            Case Else
+                card_limit = 7
+        End Select
 
-        'Select Case plr1.Count
-        '    Case 2
-        '        card_limit = 11
-        '    Case 3
-        '        card_limit = 9
-        '    Case 4
-        '        card_limit = 8
-        '    Case Else
-        '        card_limit = 7
-        'End Select
         For i As Integer = card_limit To 14
             cards.Push(New Card(i, SuitType.Club))
             cards.Push(New Card(i, SuitType.Diamond))

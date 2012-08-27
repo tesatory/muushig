@@ -31,7 +31,7 @@ Public Class Round
         For Each p As Player In _plr
             plr.Add(p.name, p)
         Next
-        deck = New Deck
+        deck = New Deck(plr.Count)
         deck.Shuffle()
         For Each p As Player In _plr
             p.hand.Clear()
