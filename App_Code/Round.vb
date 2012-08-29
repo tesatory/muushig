@@ -118,6 +118,11 @@ Public Class Round
         Next
 
         If remain = 0 Then
+            For i As Integer = 0 To num.Count - 1
+                If plr.Keys(i) = dealer Then
+                    dealer1 = dealer
+                End If
+            Next
             If dealer1 <> dealer Then
                 who = dealer1
                 status = RoundStatus.play
