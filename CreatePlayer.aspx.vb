@@ -6,7 +6,7 @@ Partial Class CreatePlayer
         Dim game As Game = Application("game")
 
         If (game Is Nothing) Then
-            Response.Redirect("./Start.aspx")
+            Response.Redirect("./")
         End If
 
         Dim new_player As Player
@@ -15,6 +15,6 @@ Partial Class CreatePlayer
         Session("player") = new_player
         game.AddPlayer(new_player)
 
-        Response.Redirect("./Start.aspx")
+        Response.Redirect("./")
     End Sub
 End Class

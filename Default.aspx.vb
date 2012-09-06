@@ -1,5 +1,5 @@
 ﻿
-Partial Class Start
+Partial Class _Default
     Inherits System.Web.UI.Page
     Private player As Player
     Private game As Game

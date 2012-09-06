@@ -4,17 +4,29 @@ Partial Class GamePage
     Private player As Player
     Private game As Game
 
-
     Protected Sub Page_Load(sender As Object, e As System.EventArgs) Handles Me.Load
         player = Session("player")
         game = Application("game")
 
 
         If (game Is Nothing) Or (player Is Nothing) Then
-            Response.Redirect("./Start.aspx")
+            Response.Redirect("./")
         End If
 
         player.last_active_time = Now
+
+        If IsPostBack Then
+            'Dim c As Integer = 0
+            'While player.time = game.time And c < 10
+            '    Threading.Thread.Sleep(1000)
+            '    c += 1
+            'End While
+
+            If player.time < game.time Then
+                player.time = game.time
+                up_main.Update()
+            End If
+        End If
 
         UpdatePlayersStatus()
         UpdateGameStatus()
@@ -205,6 +217,7 @@ Partial Class GamePage
         btn_in.Visible = False
         btn_out.Visible = False
         timer.Enabled = True
+        game.time += 1
     End Sub
 
     Protected Sub btn_out_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btn_out.Click
@@ -212,6 +225,7 @@ Partial Class GamePage
         btn_in.Visible = False
         btn_out.Visible = False
         timer.Enabled = True
+        game.time += 1
     End Sub
 
     Protected Sub btn_change_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btn_change.Click
@@ -237,6 +251,7 @@ Partial Class GamePage
         pnl_change.Visible = False
         timer.Enabled = True
         change_list.Items.Clear()
+        game.time += 1
 
     End Sub
 
@@ -252,11 +267,13 @@ Partial Class GamePage
         pnl_play.Visible = False
         timer.Enabled = True
         play_list.Items.Clear()
+        game.time += 1
     End Sub
 
     Protected Sub btn_quit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btn_quit.Click
         Session("player") = Nothing
-
+        Application("game") = Nothing
+        game.time += 1
     End Sub
 
 End Class

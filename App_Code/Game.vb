@@ -8,7 +8,7 @@ Public Enum GameStatus
 End Enum
 
 Public Class Game
-
+    Public time As Integer
     Public status As GameStatus
     Public dealer_ind As Integer
     Private rand As Random
@@ -21,6 +21,7 @@ Public Class Game
         players = New List(Of Player)
         status = GameStatus.WAITING_PLAYERS
         rand = New Random
+        time = 0
     End Sub
 
     Public Sub AddPlayer(ByVal p As Player)
@@ -69,6 +70,7 @@ Public Class Game
         current_round = New Round(players, players(dealer_ind).name)
 
         status = GameStatus.STARTED
+        time += 1
     End Sub
 
     Public Sub RoundFinished()
@@ -79,10 +81,12 @@ Public Class Game
         Next
         dealer_ind = (dealer_ind + 1) Mod plr.Count
         current_round = New Round(plr, players(dealer_ind).name)
+        time += 1
     End Sub
 
     Public Sub GameFinished()
 
+        time += 1
     End Sub
 
 End Class

@@ -19,7 +19,7 @@
             </td>
             <td width="600px">
                 <div id="game_table">
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                    <asp:UpdatePanel ID="up_main" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                             <asp:Label ID="lbl_players_name" runat="server">
                             </asp:Label>
@@ -62,14 +62,15 @@
                                 <asp:Button ID="btn_play" runat="server" Text="Гарах" />
                             </asp:Panel>
                             </div>
-                            <asp:Timer ID="timer" runat="server" Interval="1000">
-                            </asp:Timer>
                             <asp:HiddenField ID="min_card_num" runat="server" />
                             <asp:HiddenField ID="max_card_num" runat="server" />
                         </ContentTemplate>
-                        <Triggers>
-                            <asp:AsyncPostBackTrigger ControlID="timer" EventName="Tick" />
-                        </Triggers>
+                    </asp:UpdatePanel>
+                    <asp:UpdatePanel ID="up_timer" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true" >
+                        <ContentTemplate>
+                            <asp:Timer ID="timer" runat="server" Interval="1000" >
+                            </asp:Timer>
+                        </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
             </td>
